@@ -17,7 +17,7 @@
             int totalEmpWage = 0;
             Random random = new Random();
             //Computation
-            for (int day = 0; day < NUM_OF_WORKING_DAYS; day++)
+            for (int day = 0; day < NUM_OF_WORKING_DAYS && totalworkinghours < MAX_IN_MONTH; day++)
             {
                 int empCheck = random.Next(0,3);
                 switch (empCheck)
