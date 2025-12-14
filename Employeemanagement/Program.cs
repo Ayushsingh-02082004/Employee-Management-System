@@ -1,51 +1,57 @@
 ﻿namespace Employeemanagement
 {
-    internal class Program
+    internal class ComputeEmpWages
     {
-        //Constants
-        public const int IS_PART_TIME = 1;
-        public const int IS_FULL_TIME = 2;
-        public const int EMP_RATE_PER_HOUR = 20;
-        public const int NUM_OF_WORKING_DAYS = 20;
-        public const int MAX_IN_MONTH = 100;
-        public static int ComputeEmpWage()
+
+        private int empHours;
+        private int empWages;
+        private int total_emp_working_days;
+        private int total_emp_wages;
+        private int total_emp_working_hours;
+
+        private string company;
+        private int emp_per_hours;
+        private int Max_working_hours;
+        private int Max_emp_working_days;
+        public ComputeEmpWages(string company, int emp_per_hours, int Max_working_hours, int Max_emp_working_days)
         {
-            //VARIABLES
-            int empHrs = 0;
-            int totalworkinghours = 0;
-            int totalEmpWage = 0;
-            Random random = new Random();
-            //Computation
-            for (int day = 0; day < NUM_OF_WORKING_DAYS && totalworkinghours < MAX_IN_MONTH; day++)
+            this.emp_per_hours = emp_per_hours;
+            this.Max_working_hours = Max_working_hours;
+            this.Max_emp_working_days = Max_emp_working_days;
+            this.company = company;
+        }
+        public void calculateWages()
+        {
+            while (total_emp_working_hours < Max_working_hours && total_emp_working_days < Max_emp_working_days)
             {
-                int empCheck = random.Next(0,3);
-                switch (empCheck)
+
+                Random random = new Random();
+                int empAttendence = random.Next(0, 3);
+                switch (empAttendence)
                 {
-                    case IS_PART_TIME:
-                        empHrs += 4;
-                        totalworkinghours += 4;
+                    case 1:
+                        empHours = 4;
                         break;
-                    case IS_FULL_TIME:
-                        empHrs += 8;
-                        totalworkinghours += 8;
+                    case 2:
+                        empHours = 8;
                         break;
                     default:
-                        empHrs += 0;
+                        empHours = 0;
                         break;
                 }
-                
+                total_emp_working_days++;
+                total_emp_working_hours += empHours;
+                Console.WriteLine($"Days: {total_emp_working_days} Employee Hours: {total_emp_working_hours} Present {empHours}");
             }
-            
-            totalEmpWage = empHrs * EMP_RATE_PER_HOUR;
-
-            return totalEmpWage;
-            
+            total_emp_wages = total_emp_working_hours * emp_per_hours;
+            Console.WriteLine($"Toatl Employee Wages for company {company} is : {total_emp_wages}$");
         }
 
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
-            int wage = ComputeEmpWage();
-            Console.WriteLine(wage);
+            ComputeEmpWages compute_emp_wages = new ComputeEmpWages("Bridgelabz", 20, 100, 20);
+            compute_emp_wages.calculateWages();
+
         }
     }
 
