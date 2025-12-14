@@ -3,12 +3,8 @@
     internal class ComputeEmpWages
     {
 
-        private int empHours;
-        private int empWages;
-        private int total_emp_working_days;
-        private int total_emp_wages;
-        private int total_emp_working_hours;
 
+        int total_emp_wages = 0;
         private string company;
         private int emp_per_hours;
         private int Max_working_hours;
@@ -22,6 +18,9 @@
         }
         public void calculateWages()
         {
+            int empHours = 0;
+            int total_emp_working_days = 0;
+            int total_emp_working_hours = 0;
             while (total_emp_working_hours < Max_working_hours && total_emp_working_days < Max_emp_working_days)
             {
 
@@ -44,14 +43,21 @@
                 Console.WriteLine($"Days: {total_emp_working_days} Employee Hours: {total_emp_working_hours} Present {empHours}");
             }
             total_emp_wages = total_emp_working_hours * emp_per_hours;
-            Console.WriteLine($"Toatl Employee Wages for company {company} is : {total_emp_wages}$");
+            Console.WriteLine($"Toatl Employee Wage for company {company} is : {total_emp_wages}$");
+        }
+        public string toString()
+        {
+            return "Ttal Employee Wage for Company : " + this.company + " is: " + this.total_emp_wages + "$";
         }
 
         static void Main(string[] args)
         {
-            ComputeEmpWages compute_emp_wages = new ComputeEmpWages("Bridgelabz", 20, 100, 20);
-            compute_emp_wages.calculateWages();
-
+            ComputeEmpWages Bridgelabz = new ComputeEmpWages("Bridgelabz", 20, 100, 20);
+            Bridgelabz.calculateWages();
+            Console.WriteLine(Bridgelabz.toString());
+            ComputeEmpWages Google = new ComputeEmpWages("Google", 50, 100, 20);
+            Google.calculateWages();
+            Console.WriteLine(Google.toString());
         }
     }
 
